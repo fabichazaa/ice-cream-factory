@@ -1,0 +1,1077 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,200&display=swap');
+
+/*=============== VARIABLES ===============*/
+:root{
+    --nav-height: 3.5rem;
+
+    /*========== Colors ==========*/  
+    --fucsia: hsl(333, 92%, 54%);
+    --light-pink: hsl(325, 89%, 82%);
+    --cream: black;
+    --text-color: white;
+
+    --background-gradient: linear-gradient(90deg, hsl(325, 89%, 82%) 0%, hsl(333, 92%, 54%) 100%);
+
+    /*========== Font and typography ==========*/
+    --body-font: 'Source Sans Pro', sans-serif;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1.2rem;
+    --biggest-font-size: 2rem;
+
+    /*========== Font weight ==========*/
+    --font-light: 300;
+    --font-normal: 400;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+    --font-bolder: 900;
+
+    /*========== Font weight ==========*/
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+    --mb-0-5: 1.5rem;
+
+    /*========== Measures ==========*/
+    --fab-0-5: 0.5rem;
+    --fab-1: 1rem;
+    --fab-1-5: 1.5rem;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+
+}
+@media screen and (min-width: 992px) {
+    :root{
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --biggest-font-size: 4rem;
+
+        --mb-1: 0.4rem;
+        --mb-0-5: 1.2rem;
+ 
+    }
+    
+}
+*{
+    /*Includes width-padding-margin when calculating margin*/
+    /*So if you have a 200x200 box and add margin/padding, it remains 200x200*/
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 3.5rem 0 0 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background: var(--background-gradient);
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4{
+    color: var(--text-color);
+    font-weight: var(--font-semi-bold);
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    /*The image will occupy the width in which is contained*/
+    max-width: 100%;
+    height: auto;
+}
+
+
+/*=============== LAYOUT ===============*/
+.main{
+    overflow: hidden;
+}
+
+.container{
+    max-width: 968px;
+    margin-left: var(--mb-1-5);
+    margin-right: var(--mb-1-5);
+}
+
+.button{
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(251, 55, 117); 
+    padding: 10px 20px;
+    font-size: 1.25rem;
+}
+
+.button:hover{
+    color: white;
+    background-color: rgb(246, 46, 109);
+}
+
+.button-outlined{
+    color: white;
+    padding: 6px 14px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.button-outlined:hover{
+    transition: .4s;
+    color: var(--cream);
+    border-color: var(--cream);
+}
+
+.button-outlined:active{
+    color: var(--fucsia);
+    border-color: var(--fucsia);
+}
+
+input{
+    border: none;
+    outline: none;
+}
+/*=============== HEADER ===============*/
+.header{
+    /*If we don't add 100% of width, it shrinks to the min-content i think*/
+    width: 100%;
+    background: var(--background-gradient);
+    position: fixed;
+    top: 0;
+    left: 0;
+    /*TODO: Why??? */
+    z-index: var(--z-fixed);
+}
+
+/*=============== NAV ===============*/
+.nav{
+    height: var(--nav-height);
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link,
+.nav-logo{
+    color: var(--text-color);
+}
+
+/*From 0 to 767px*/
+@media screen and (max-width: 767px){
+    /*nav-menu exists but is positioned fixed very very high
+    top: 0 is the line when the screen starts, so negative value is outside of screen */
+    .nav-menu{
+        position: fixed;
+        width: 100%;
+        background: black;
+        top: -150%;
+        left: 0;
+        padding: 3.5rem 0;
+        /* it takes 4 seconds for it to appear*/
+        transition: .4s;
+        z-index: 100;
+        border-radius: 0 0 1.5rem 1.5rem;
+        font-weight: var(--font-bold);
+    }
+}
+
+.nav-logo{
+    font-size: 1rem;
+}
+
+.nav-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1.5rem;
+}
+
+.nav-toggle{
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.nav-toggle-img{
+    width: 79px;
+    /*Position top/left are related to its container*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1.5rem;
+}
+
+.nav-close{
+    font-size: 1.8rem;
+    position: absolute;
+    top: .5rem;
+    right: .7rem;
+    cursor: pointer;
+}
+
+.nav-link{
+    text-transform: uppercase;
+    font-weight: var(--font-bold);
+    transition: .4s;
+}
+
+.nav-link:hover,
+.nav-link:active{
+    color: var(--fucsia);
+}
+
+.nav-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-logo i{
+    margin: 0 8px 0 0;
+    padding: 1px 0 0 0;
+}
+
+.nav-logo:hover{
+    transition: .4s;
+    color: var(--cream);
+}
+
+/*=============== HOME ===============*/
+.home-content{
+    display: grid;
+    row-gap: 1.5rem;
+    padding-top: 1rem;
+}
+
+.home-group{
+    display: grid;
+    position: relative;
+    padding-top: 2rem;
+}
+
+.home-img{
+    height: 250px;
+    justify-self: center;
+    animation: floating 2s ease-in-out infinite;
+}
+
+.home-indicator{
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 7rem;
+    right: 2rem;
+}
+  
+.home-indicator::after{
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 48px;
+    background-color: white;
+    top: -3rem;
+    right: 45%;
+}
+
+.home-details-img{
+    position: absolute;
+    right: .5rem;
+}
+
+.home-details-title,
+.home-details-subtitle{
+    display: block;
+    text-align: right;
+}
+
+.home-details-subtitle{
+    margin-top: 0.3rem;
+}
+
+.home-data{
+    display: flex;
+    flex-direction: column;
+}
+
+.home-subtitle{
+    text-transform: uppercase;
+    font-size: var(--h3-font-size);
+    margin-bottom: var(--mb-1);
+}
+
+.home-title{
+    text-transform: uppercase;
+    font-size: var(--biggest-font-size);
+    font-weight: var(--font-bolder);
+    line-height: 109%;
+    margin-bottom: var(--mb-0-5);
+}
+
+.home-description{
+    margin-bottom: 2rem;
+}
+
+.home-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-action{
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 0.25rem;
+    font-size: var(--h3-font-size);
+}
+
+.home-action i{
+    margin-top: .2rem;
+}
+
+.active-link{
+    position: relative;
+}
+
+/*If we dont add position, dot will appear on top of the nav-link, centered
+Absolute means we are moving it in relation of the nav-link container */
+.active-link::before{
+    content: '';
+    position: absolute;
+    bottom: -.75rem;
+    left: 45%;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border-radius: 80%;
+}
+
+.swiper-pagination{
+    position: initial;
+    margin-top: 10px;
+}
+  
+.swiper-pagination-bullet{
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    opacity: 1;
+}
+  
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{
+    margin: 0 .5rem;
+} 
+
+.swiper-pagination-bullet-active{
+    width: 1.5rem;
+    height: 5px;
+    border-radius: .5rem;
+}
+
+/*===============  FLAVORS ===============*/
+.top-flavors{
+    position: relative;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-flavors-title{
+    font-weight: var(--font-bolder);
+    font-size: var(--h1-font-size);
+    margin-bottom: 1.5rem;
+}
+
+.flavors{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+}
+
+.flavor{
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.flavor h4{
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    margin-bottom: var(--fab-0-5);
+}
+
+.flavor-img{
+    height: 200px;
+    transition: .4s;
+}
+
+.flavor-img:hover{
+    transition: .4s;
+    transform: translate(0, -15px);
+}
+
+/*===============  ABOUT ===============*/
+.about{
+    display: grid;
+    row-gap: 1rem;
+    justify-items: center;
+    margin-bottom: 4rem;
+}
+
+.about-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
+.about-title{
+    margin-bottom: 1.6rem;
+    font-size: var(--h1-font-size);
+}
+
+.about-description{
+    font-size: 1.2rem;
+    font-weight: var(--font-light);
+    margin-bottom: 2rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+
+.about-img{
+    width: 500px;
+    animation: floating 2s ease-in-out infinite;
+}
+
+/*=============== SHOP ===============*/
+.shop-sec-title{
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.shop-grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin: 0px 1.8rem;
+}
+
+.shop-item{
+    position: relative;
+    padding: 0.5rem 0 1rem 0;
+    background-image: linear-gradient(160deg, rgb(57, 57, 57) 0%, black 100%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* TODO: For some reason overflow hides the hidden object */
+    overflow: hidden;
+}
+
+.shop-subtitle{
+    font-weight: var(--font-light);
+    margin-bottom: 1rem;
+}
+
+.shop-img{
+    color: lemonchiffon;
+    width: 50px;
+    transition: .4s;
+    margin-bottom: 0.5rem;
+}
+
+.shop-img:hover{
+    transition: .4s;
+    transform: translate(0, -10px);
+}
+
+.shop-price{
+    font-size: 1.2rem;
+}
+
+.shop-action{
+    transition: .3s;
+    background-color: var(--fucsia);
+    padding: 0.5rem 0.7rem 0.5rem 0.5rem;
+    border-radius: 5px 5px 10px 5px;
+    position: absolute;
+    bottom: 0;
+    right: -3rem;
+    font-size: 1.2rem;
+}
+
+.shop-item:hover .shop-action{
+    right: 0;
+}
+
+/*=============== DECO ===============*/
+.deco{
+    margin: 4rem 2rem;
+    background-image: linear-gradient(160deg, rgb(57, 57, 57) 0%, black 100%);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.deco-description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.8rem 0 0.8rem 0;
+}
+
+.deco-title{
+    font-weight: var(--font-light);
+    margin-bottom: 1.2rem;
+}
+
+.deco img{
+    width: 150px;
+    margin: 2rem 0;
+}
+
+/*=============== NEW FLAVORS ===============*/
+.new-sec-title{
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.new-flavor{
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(160deg, rgb(57, 57, 57) 0%, black 100%);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 242px;
+    padding: 2rem 0 1.5rem 0;
+    margin-bottom: 4rem;
+}
+
+.new-flavor-img{
+    transition: .3s;
+    width: 75px;
+}
+
+.new-flavor-img:hover{
+    transition: .3s;
+    transform: translateY(-.5rem);
+}
+
+.new-flavor-info{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-flavor-title{
+    margin-bottom: 0.2rem;
+}
+
+.new-flavor-subtitle{
+    font-weight: var(--font-light);
+    margin-bottom: 0.7rem;
+}
+
+.new-flavors-prices{
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+.new-flavor-old-price{
+    color: var(--fucsia);
+    font-weight: lighter;
+    text-decoration: line-through;
+    font-size: 1rem;;
+}
+
+.new-tag{
+    position: absolute;
+    background-color: var(--fucsia);
+    padding: 0.5rem 0.6rem;
+    border-radius: 5px;
+    left: 9%;
+    top: 7%;
+
+}
+
+/*=============== SuBSCRIBE ===============*/
+.subscribe-sec-title{
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.subscribe{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.subscribe-text{
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+
+.subscribe-mail{
+    display: flex;
+    justify-content: space-between;
+    background-image: linear-gradient(160deg, rgb(57, 57, 57) 0%, black 100%);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.subscribe-input{
+    width: 70%;
+    padding: 0 .5rem;
+    background: none;
+    color: white;
+}
+
+.subscribe-input::placeholder{
+    color: white;
+}
+
+/*===============  FOOTER ===============*/
+.footer{
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-grid{
+    margin: 4rem 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 1.2rem;
+    padding: 1rem;
+    row-gap: 2.2rem;
+}
+
+.footer-column{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.6rem;
+    overflow: hidden;
+}
+
+.footer-column h4{
+    margin-bottom: 0.2rem;
+}
+
+.footer-column h5{
+    font-weight: var(--font-light);
+}
+
+.social-media{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    column-gap: 0.2rem;
+    margin-top: 0.5rem;
+}
+
+.sm-icon{
+    color: white;
+    background-color: var(--fucsia);
+    padding: 0.3rem 0.4rem;
+    border-radius: 4px;
+}
+
+.footer-copyright{
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.footer-img-1{
+    position: absolute;
+    width: 250px;
+    right: -33%;
+}
+
+.footer-img-2{
+    position: absolute;
+    width: 160px;
+    right: 0%;
+}
+
+/*===============  SCROLL BUTTON ===============*/
+.scroll-up{
+    color: white;
+    position: fixed;
+    background: black;
+    opacity: 0.5;
+    z-index: 100;
+    right: 0;
+    bottom: -15%;
+    transition: .3s;
+    border-radius: 4px;
+    padding: 0.2rem 0.35rem 0.15rem 0.35rem;
+    margin: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.show-scroll{
+    bottom: 0;
+}
+
+.scroll-up:hover{
+    opacity: 1;
+    transition: .3s;
+}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar{
+    width: 0.6rem;
+    background: #413e3e;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #272525;
+    border-radius: .5rem;
+}
+
+/*===============  BREAKPOINTS ===============*/
+/*From 0 to 320px*/
+@media screen and (max-width: 320px){
+    .container{
+      margin-left: var(--mb-1);
+      margin-right: var(--mb-1);
+    }
+
+    .home-img{
+        height: 100px;
+    }
+
+    .flavor-img{
+        height: 100px;
+    }
+
+    .flavors{
+        grid-template-columns: .8fr;
+        justify-content: center;
+    }
+
+    .about{
+        grid-template-columns: .8fr;
+        justify-content: space-around;
+        row-gap: 0rem;
+    }
+
+    .about-img{
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 375px){
+    .footer-img-1{
+        right: -15%;
+    }
+    
+    .footer-img-2{
+        right: 5%;
+    }
+}
+/*CSS CHOOSES THE LAST RULE THAT WAS DEFINED!!! 
+THATS WHY HERE THE FLEX-DIRECTION: ROW is defined last */
+/*From 767px to higher */
+@media screen and (min-width: 767px){
+    body{
+        margin: 0
+    }
+
+    .nav{
+        height: 4.5rem;
+    }
+
+    .nav-toggle,
+    .nav-close,
+    .nav-toggle-img{
+        display: none;
+    }
+
+    .nav-list{
+        flex-direction: row;
+        column-gap: 3rem;
+    }
+
+    .nav-link{
+        text-transform: initial;
+        font-weight: var(--font-normal);
+    }
+
+    .button-outlined:hover,
+    .button-outlined:active{
+        border-color: var(--cream);
+        color: var(--cream)
+    }
+
+    .nav-link:hover{
+        color: var(--cream);
+    }
+
+    .home-content{
+        padding: 8rem 0 1rem;
+        /*Creates two columns, with a size of 1 fr
+        fr means fracture of available space */
+        grid-template-columns: repeat(2, 1fr);
+        /*This gap is between columns and rows*/
+        gap: 4rem;
+    }
+
+    .home-img{
+        height: 300px;
+    }
+
+    .home-buttons{
+        padding: 0.25rem;
+    }
+
+    .swiper-pagination{
+        margin-top: 2.5rem;
+        margin-bottom: var(--mb-2);
+    }
+
+    .flavors{
+        padding-left: 4rem;
+        padding-right: 4rem;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 4.5rem;
+        justify-content: center;
+    }
+
+    .flavor-img{
+        height: 300px;
+    }
+
+    .about{
+        margin-top: 4rem;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem;
+    }
+
+    .about-text{
+        align-items: flex-start;
+    }
+
+    .about-description{
+        text-align: left;
+    }
+
+    .about-img{
+        width: 500px;
+    }
+
+    .shop-sec-title{
+        margin-bottom: 3.5rem;
+    }
+
+    .shop-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .shop-item{
+        padding: 0 0 1.5rem 0;
+    }
+
+    .shop-img{
+        margin-top: 1rem;
+        width: 60px;
+    }
+
+    .shop-action{
+        font-size: 1.5rem;
+    }
+
+    .deco{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        margin: 6rem 4rem;
+        padding: 0 1rem;
+    }
+
+    .deco img{
+        width: 200px;
+    }
+
+    .deco-title{
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    .new-flavor{
+        margin-bottom: 8rem;
+    }
+
+    .subscribe-text{
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-grid{
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 4rem 3rem 1rem 3rem;
+    }
+
+    .footer-img-1{
+        width: 150px;
+        left: -8%;
+    }
+    
+    .footer-img-2{
+        width: 150px;
+        right: -9%;
+    }
+    
+    .scroll-up{
+        margin: 1.5rem;
+    }
+}
+
+/* From 992 pixels to higher */
+@media screen and (min-width: 992px){
+    .container{
+        /*Content occupies n% or npx width and the rest left will be margin*/
+        /*If width is 60%, margins will be 20 and 20 each side*/
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home-content{
+        padding: 8rem 0 4rem;
+        padding-top: 10rem;
+        gap: 3rem;
+    }
+
+    .home-group{
+        padding-top: 0;
+    }
+
+    .home-indicator{
+        top: initial;
+        right: initial;
+        bottom: 50px;
+        right: 34%;
+    }
+
+    .home-indicator::after{
+        top: 0; 
+        height: 70px;
+    }
+
+    .home-img{
+        height: 400px;
+        /*Lifts it up a little bit*/
+        transform: translateY(-3rem);
+    }
+
+    .home-details-img{
+        bottom: 0;
+    }
+
+    .home-description{
+        font-size: 1.2rem;
+        margin-bottom: var(--mb-2-5);
+        padding-right: 2rem;
+    }
+
+    .home-buttons{
+        margin-right: 3rem;
+    }
+
+    .flavors{
+        column-gap: 12rem;
+    }
+
+    .flavor-img{
+        height: 350px;
+    }
+
+    .about{
+        margin-top: 8rem;
+        column-gap: 3rem;
+    }
+
+    .shop-grid{
+        padding: 0 3rem;
+        row-gap: 2rem;
+    }
+
+    .shop-action{
+        font-size: 1.5rem;
+        right: -4rem;
+    }
+
+    .deco{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .deco img{
+        width: 250px;
+    }
+
+    .new-flavor{
+        width: 310px;
+        border-radius: 1rem;
+        padding: 2rem 0;
+    }
+
+    .footer-grid{
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 6rem 5rem 1rem 5rem;
+    }
+
+    .footer-img-1{
+        width: 250px;
+        left: -5%;
+        top: 25%;
+    }
+    
+    .footer-img-2{
+        width: 220px;
+        right: -3%;
+        top: 28%;
+    }
+
+}
+
+.show-menu{
+    top: 0;
+}
+/*=============== KEYFRAMES ===============*/
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }   
+  }
+  
